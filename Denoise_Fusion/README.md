@@ -7,7 +7,7 @@
   * `DnCNN_color`:pre_trained denoised model for color images
   
 * `saved_models`:the saved fusion models (with all augmentation modes) for each pre_trained denoisers
-  * `DnCNN` `net_F` : fusion models for gray images pre-denoised by DnCNN  for special noise levels
+  * `DnCNN` [net_F](https://github.com/IVRL/DEU/tree/master/Denoise_Fusion/saved_models/DnCNN/net_F) : fusion models for gray images pre-denoised by DnCNN  for special noise levels
   * `DnCNN` `net_F` : fusion models for gray images pre-denoised by MemNet for special noise levels
   * `DnCNN` `net_F` : fusion models for gray images pre-denoised by RIDNet for special noise levels
   * `DnCNN_color` `net_F` : fusion models for color images pre-denoised by DnCNN_color for special noise levels
