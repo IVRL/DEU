@@ -1,21 +1,20 @@
 # Denoising experiments
-## pre_trained
-We provide pre_trained fusion models:
+## Pre-trained
+We provide pre-trained fusion models:
 
-* `saved_models`: the saved fusion models (with all augmentation modes) for each pre_trained denoisers
-  * `DnCNN` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN/net_F) : fusion models for gray images pre-denoised by DnCNN  for special noise levels
-  * `MemNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet/net_F) : fusion models for gray images pre-denoised by MemNet for special noise levels
-  * `RIDNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet/net_F) : fusion models for gray images pre-denoised by RIDNet for special noise levels
-  * `DnCNN_color` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color/net_F) : fusion models for color images pre-denoised by DnCNN_color for special noise levels
+* `saved_models`: the saved fusion models (with all augmentation modes) for each pre-trained denoiser
+  * `DnCNN` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN/net_F) : fusion models for grayscale images with the DnCNN backbone for different noise levels.
+  * `MemNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet/net_F) : fusion models for grayscale images with the MemNet backbone for different noise levels.
+  * `RIDNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet/net_F) : fusion models for grayscale images with the RIDNet backbone for different noise levels.
+  * `DnCNN_color` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color/net_F) : fusion models for color images with the DnCNN_color backbone for different noise levels.
 
 * `test.py`: test for the saved fusion models
 
-To test the fusion models for gray images (denoise_net DnCNN/MemNet/RIDNet respectively):
+To test the fusion models for grayscale images (denoise_net DnCNN/MemNet/RIDNet respectively):
 
 ```python test.py --denoise_net DnCNN --color_mode gray ```
 
 To test the fusion models for color images (denoise_net DnCNN_color):
-
 
 ```python test.py --denoise_net DnCNN_color --color_mode color ```
 
