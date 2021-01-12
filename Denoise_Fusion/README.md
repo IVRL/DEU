@@ -1,34 +1,35 @@
 # Denoising experiments
 ## pre_trained
-* `model`:the pre_trained denoisers
-  * `DnCNN`:pre_trained denoised model for gray images
-  * `MemNet`:pre_trained denoised model for gray images
-  * `RIDNet`:pre_trained denoised model for gray images
-  * `DnCNN_color`:pre_trained denoised model for color images
-  
+We provide pre_trained fusion models:
+
 * `saved_models`:the saved fusion models (with all augmentation modes) for each pre_trained denoisers
-  * `DnCNN` `net_F` : fusion models for gray images pre-denoised by DnCNN  for special noise levels
-  * `DnCNN` `net_F` : fusion models for gray images pre-denoised by MemNet for special noise levels
-  * `DnCNN` `net_F` : fusion models for gray images pre-denoised by RIDNet for special noise levels
-  * `DnCNN_color` `net_F` : fusion models for color images pre-denoised by DnCNN_color for special noise levels
+  * `DnCNN` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN/net_F) : fusion models for gray images pre-denoised by DnCNN  for special noise levels
+  * `MemNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet/net_F) : fusion models for gray images pre-denoised by MemNet for special noise levels
+  * `RIDNet` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet/net_F) : fusion models for gray images pre-denoised by RIDNet for special noise levels
+  * `DnCNN_color` [net_F](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color/net_F) : fusion models for color images pre-denoised by DnCNN_color for special noise levels
 
 * `test.py`:test for the saved fusion models:
 
+To test the fusion models for gray images (denoise_net DnCNN/MemNet/RIDNet respectively)
+
 ```python test.py --denoise_net DnCNN --color_mode gray ```
 
+To test the fusion models for color images (denoise_net DnCNN_color)
 
+
+```python test.py --denoise_net DnCNN_color --color_mode color ```
 
 
 
 
 ## Re-training
-To reproduce the regular training of Fusion models for gray images (net_mode DnCNN/MemNet/RIDNet respectively)
+To reproduce the regular training of Fusion models for gray images (denoise_net DnCNN/MemNet/RIDNet respectively)
 
 ```python train.py --denoise_net DnCNN ```
 
 To reproduce the regular training of Fusion models for gray images for different modes:
 
-For flip and rotation:
+for flip and rotation:
 
 ```python train.py --mode_list 0 1 2 3 4 5 6 7  ```
 
@@ -53,8 +54,3 @@ The spatial attention and channel attention are just fit for gray models until n
 The default setting is the fusion models for gray images with all augmentaion modes pre denoised by DnCNN 
 
 ```python train.py  ```
-
-
-
-
-
