@@ -48,7 +48,7 @@ torch.backends.cudnn.deterministic = True
 ######parser default##########
 parser = argparse.ArgumentParser(description="ensemble_train_and_inference")
 parser.add_argument("--color_mode", type=str, default='gray', help='Grayscale (gray) or color (color) model')
-parser.add_argument("--noise_std_values",nargs='+', type=int, default=[50,40], help='the noise level list')
+parser.add_argument("--noise_std_values",nargs='+', type=int, default=[50,40,30,20,10], help='the noise level list')
 parser.add_argument("--mode_list", nargs="+", type=int,default=[0,1,2,3,4,5,6,7,8,9,10,11,12], help='augmentation_mode,0-7 mean the filp and rotation,8-12 mean the DCT masking')
 parser.add_argument("--test_path", type=str, default='./data/images/test', help='dataset')
 parser.add_argument("--ensemble_method", type=str, default='F', help='choose S(spatial position attention) or C(channel attention) or F(Fusion),S and C are just used for gray models')
