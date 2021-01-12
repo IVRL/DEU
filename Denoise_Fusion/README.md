@@ -1,11 +1,7 @@
 # Denoising experiments
 ## pre_trained
-* `model`:the pre_trained denoisers
-  * `DnCNN`:pre_trained denoised model for gray images
-  * `MemNet`:pre_trained denoised model for gray images
-  * `RIDNet`:pre_trained denoised model for gray images
-  * `DnCNN_color`:pre_trained denoised model for color images
-  
+We provide pre_trained fusion models:
+
 * `saved_models`:the saved fusion models (with all augmentation modes) for each pre_trained denoisers
   * `DnCNN` [net_F](https://github.com/IVRL/DEU/tree/master/Denoise_Fusion/saved_models/DnCNN/net_F) : fusion models for gray images pre-denoised by DnCNN  for special noise levels
   * `MemNet` [net_F](https://github.com/IVRL/DEU/tree/master/Denoise_Fusion/saved_models/MemNet/net_F) : fusion models for gray images pre-denoised by MemNet for special noise levels
@@ -14,15 +10,20 @@
 
 * `test.py`:test for the saved fusion models:
 
+To test the fusion models for gray images (denoise_net DnCNN/MemNet/RIDNet respectively)
+
 ```python test.py --denoise_net DnCNN --color_mode gray ```
 
+To test the fusion models for color images (denoise_net DnCNN_color)
 
+
+```python test.py --denoise_net DnCNN_color --color_mode color ```
 
 
 
 
 ## Re-training
-To reproduce the regular training of Fusion models for gray images (net_mode DnCNN/MemNet/RIDNet respectively)
+To reproduce the regular training of Fusion models for gray images (denoise_net DnCNN/MemNet/RIDNet respectively)
 
 ```python train.py --denoise_net DnCNN ```
 
