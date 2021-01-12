@@ -29,7 +29,7 @@ To reproduce the regular training of Fusion models for gray images (denoise_net 
 
 To reproduce the regular training of Fusion models for gray images for different modes:
 
-For flip and rotation:
+for flip and rotation:
 
 ```python train.py --mode_list 0 1 2 3 4 5 6 7  ```
 
