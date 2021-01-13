@@ -8,7 +8,7 @@
 
 {Note: paper under submission}
 
-#### [[Paper]](404)
+#### [[Paper]](http://arxiv.org/abs/2101.04631) - [[Supp]](https://github.com/IVRL/DEU/blob/main/supplementary_material.pdf)
 
 > **Abstract:** *Following the performance breakthrough of denoising networks, improvements have come chiefly through novel architecture designs and increased depth. While novel denoising networks were designed for real images coming from different distributions, or for specific applications, comparatively small improvement was achieved on Gaussian denoising. The denoising solutions suffer from epistemic uncertainty that can limit further advancements. This uncertainty is traditionally mitigated through different ensemble approaches. However, such ensembles are prohibitively costly with deep networks, which are already large in size.*
 >
@@ -23,7 +23,7 @@ All the models and instructions for testing with our pretrained networks, and fo
 @article{ma2021deep,
     title   = {Deep {Gaussian} Denoiser Epistemic Uncertainty and Decoupled Dual-Attention Fusion},
     author  = {Ma, Xiaoqi and Lin, Xiaoyu and El Helou, Majed and S{\"u}sstrunk, Sabine},
-    journal = {arXiv preprint},
+    journal = {arXiv preprint arXiv:2101.04631},
     year    = {2021}
 }
 ```
