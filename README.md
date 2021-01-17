@@ -3,7 +3,7 @@
 **Authors**: Xiaoqi Ma, Xiaoyu Lin, [Majed El Helou](https://majedelhelou.github.io/), and Sabine Süsstrunk
 
 ![Python 3.7](https://img.shields.io/badge/python-3.7-green.svg?style=plastic)
-![pytorch 1.1.0](https://img.shields.io/badge/pytorch-1.1.0-green.svg?style=plastic)
+![pytorch 1.6.0](https://img.shields.io/badge/pytorch-1.6.0-green.svg?style=plastic)
 ![CUDA 10.1](https://camo.githubusercontent.com/5e1f2e59c9910aa4426791d95a714f1c90679f5a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f637564612d31302e312d677265656e2e7376673f7374796c653d706c6173746963)
 
 {Note: paper under submission}
