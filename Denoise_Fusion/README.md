@@ -18,7 +18,11 @@
 
 If you want to test the fusion model for DnCNN with joint manipulation modes
 
-```python test.py --denoise_net DnCNN --color_mode gray ```
+```python test.py --manipulation_mode Joint --ensemble_method F --denoise_net DnCNN --color_mode gray; ```
+
+* `inference_calls`: commands to test all saved models
+
+``` bash inference_calls```
 
 
 
