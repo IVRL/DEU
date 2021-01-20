@@ -6,13 +6,17 @@
   * `RIDNet`:pre_trained denoised model for gray images
   * `DnCNN_color`:pre_trained denoised model for color images
   
-* `saved_models`:the saved fusion models (with all augmentation modes) for each pre_trained denoisers
-  * `DnCNN` `F` `` : fusion models for gray images pre-denoised by DnCNN  for special noise levels
-  * `DnCNN` `F` : fusion models for gray images pre-denoised by MemNet for special noise levels
-  * `DnCNN` `F` : fusion models for gray images pre-denoised by RIDNet for special noise levels
-  * `DnCNN_color` `net_F` : fusion models for color images pre-denoised by DnCNN_color for special noise levels
+* `saved_models`:the saved models for each pre_trained denoisers
+  * `DnCNN` `F` `Joint` : fusion models for gray images pre-denoised by DnCNN  for all manipulation modes
+  * `MemNet` `F` `Joint`: fusion models for gray images pre-denoised by MemNet for all manipulation modes
+  * `RIDNet` `F` `Joint`: fusion models for gray images pre-denoised by RIDNet for all manipulation modes
+  * `DnCNN_color` `F` `Joint` : fusion models for color images pre-denoised by DnCNN_color for all manipulation modes
+  
+  * except for the fusion models with joint manipulation modes, we also provide other saved models for channel attention module (C) and spatial attention module(S) with Spatial domain manipulation modes(SM）or frequency domain manipulation modes(FM),rather than Joint, which are shown on 
 
-* `test.py`:test for the saved fusion models:
+* `test.py`:test for the saved fusion models:  
+
+If you want to test the fusion model for DnCNN with joint manipulation modes
 
 ```python test.py --denoise_net DnCNN --color_mode gray ```
 
