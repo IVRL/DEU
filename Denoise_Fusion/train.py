@@ -33,7 +33,6 @@ import argparse
 
 ######## cude setting######
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-#os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 if torch.cuda.is_available():
     device = torch.device('cuda')
 else:
@@ -50,7 +49,8 @@ torch.backends.cudnn.deterministic = True
 parser = argparse.ArgumentParser(description="ensemble_train_and_inference")
 parser.add_argument("--color_mode", type=str, default='gray', help='Grayscale (gray) or color (color) model')
 parser.add_argument("--noise_std_values",nargs='+', type=int, default=[50,40,30,20,10], help='the noise level list')
-parser.add_argument("--mode_list", nargs="+", type=int,default=[0,1,2,3,4,5,6,7,8,9,10,11,12], help='augmentation_mode,0-7 mean the filp and rotation,8-12 mean the DCT masking')
+#parser.add_argument("--mode_list", nargs="+", type=int,default=[0,1,2,3,4,5,6,7], help='augmentation_mode,0-7 mean the filp and rotation,8-12 mean the DCT masking')
+parser.add_argument("--manipulation_mode", type=str, default="Joint", help='manipulation_mode,choose SM(manipulation in Spatial domain) or FM(manipulation in Frequency domain) or Joint')
 parser.add_argument("--train_path", type=str, default='./data/images/train', help='ensemble network train_path')
 parser.add_argument("--test_path", type=str, default='./data/images/test', help='ensemble network test_path')
 parser.add_argument("--ensemble_method", type=str, default='F', help='choose S(spatial position attention) or C(channel attention) or F(Fusion),S and C are just used for gray models ')
@@ -79,7 +79,7 @@ def train_spa_data(model_dir,train_data,test_data,train_img,test_img,noise_std_v
            
         print("the train process of noise level %d:"%noise_std_values[i])
         train_loss,train_psnr,train_ssim,test_loss,test_psnr,test_ssim,test_out=\
-        train_ensemble(model_dir,noise_std_values[i],train_loader,test_loader,model_net,optimizer,criterion,opt.ensemble_method,False)
+        train_ensemble(model_dir,noise_std_values[i],train_loader,test_loader,model_net,optimizer,criterion,False)
         
         test_out_results.append(test_out)
         print("the PSNR of train_data_set at baseline model:",np.mean(baseline_train_psnr,axis=0)[i])
@@ -94,7 +94,7 @@ def train_spa_data(model_dir,train_data,test_data,train_img,test_img,noise_std_v
 
 def main():
     #get the train images and test images
-    model_dir = os.path.join('saved_models', str(opt.denoise_net))
+    model_dir = os.path.join('saved_models', str(opt.denoise_net), str(opt.ensemble_method), str(opt.manipulation_mode))
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
     #torch.save(model.state_dict(), os.path.join(model_dir, 'net_%d.pth' % (epoch)) )
@@ -107,17 +107,25 @@ def main():
     train_img=read_clean_img(opt.train_path,color_mode=opt.color_mode,img_size=opt.img_size)
     test_img=read_clean_img(opt.test_path,color_mode=opt.color_mode,img_size=opt.img_size)
     
+    if opt.manipulation_mode=='SM':
+        mode_list=[0,1,2,3,4,5,6,7]
+    elif opt.manipulation_mode=='FM':
+        mode_list=[0,8,9,10,11,12]
+    elif opt.manipulation_mode=='Joint':
+        mode_list=[0,1,2,3,4,5,6,7,8,9,10,11,12]
+    
+    print("the denoise net is %s, "%str(opt.denoise_net),"the ensemble method is %s, "%str(opt.ensemble_method),"the manipulation mode is %s."%str(opt.manipulation_mode))
     #get the psnr results for denoised images for different mode lists
     print("Now,show the average PSNR of train datasets for different modes:")
     _,baseline_train_psnr,baseline_train_ssim=data_aug_denoise(train_img,opt.noise_std_values,[0],opt.denoise_net,opt.noise_mode)
-    train_data,train_psnr,train_ssim=data_aug_denoise(train_img,opt.noise_std_values,opt.mode_list,opt.denoise_net,opt.noise_mode)
+    train_data,train_psnr,train_ssim=data_aug_denoise(train_img,opt.noise_std_values,mode_list,opt.denoise_net,opt.noise_mode)
     print(np.mean(train_psnr,axis=0))
     print("Now,show the average SSIM of train datasets for different modes:")
     print(np.mean(train_ssim,axis=0))
     
     print("Now,show the average PSNR of test datasets for different modes:")
     _,baseline_test_psnr,baseline_test_ssim=data_aug_denoise(test_img,opt.noise_std_values,[0],opt.denoise_net,opt.noise_mode)
-    test_data,test_psnr,test_ssim=data_aug_denoise(test_img,opt.noise_std_values,opt.mode_list,opt.denoise_net,opt.noise_mode)
+    test_data,test_psnr,test_ssim=data_aug_denoise(test_img,opt.noise_std_values,mode_list,opt.denoise_net,opt.noise_mode)
     print(np.mean(test_psnr,axis=0))
     print("Now,show the average SSIM of test datasets for different modes:")
     print(np.mean(test_ssim,axis=0))
@@ -127,10 +135,10 @@ def main():
 
     # prepare the data_loader
     test_out_results=train_spa_data(model_dir,train_data,test_data,train_img,test_img,\
-                                                opt.noise_std_values,opt.mode_list,baseline_train_psnr,baseline_test_psnr,in_channels)
+                                                opt.noise_std_values,mode_list,baseline_train_psnr,baseline_test_psnr,in_channels)
        
         
-    test_results_dir= os.path.join('saved_test_results',str(opt.denoise_net),str(opt.ensemble_method))
+    test_results_dir= os.path.join('saved_test_results',str(opt.denoise_net),'net_%s'%str(opt.ensemble_method),str(opt.manipulation_mode))
     if not os.path.exists(test_results_dir):
         os.makedirs(test_results_dir)
         
@@ -142,4 +150,5 @@ if __name__ == "__main__":
     main()
     
     
+
 

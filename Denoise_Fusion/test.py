@@ -32,7 +32,6 @@ import argparse
 
 ######## cude setting######
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-#torch.cuda.set_device(3)
 if torch.cuda.is_available():
     device = torch.device('cuda')
 else:
@@ -49,7 +48,7 @@ torch.backends.cudnn.deterministic = True
 parser = argparse.ArgumentParser(description="ensemble_train_and_inference")
 parser.add_argument("--color_mode", type=str, default='gray', help='Grayscale (gray) or color (color) model')
 parser.add_argument("--noise_std_values",nargs='+', type=int, default=[50,40,30,20,10], help='the noise level list')
-parser.add_argument("--mode_list", nargs="+", type=int,default=[0,1,2,3,4,5,6,7,8,9,10,11,12], help='augmentation_mode,0-7 mean the filp and rotation,8-12 mean the DCT masking')
+parser.add_argument("--manipulation_mode", type=str, default="Joint", help='manipulation_mode,choose SM(manipulation in Spatial domain) or FM(manipulation in Frequency domain) or Joint')
 parser.add_argument("--test_path", type=str, default='./data/images/test', help='dataset')
 parser.add_argument("--ensemble_method", type=str, default='F', help='choose S(spatial position attention) or C(channel attention) or F(Fusion),S and C are just used for gray models')
 parser.add_argument("--denoise_net", type=str, default='DnCNN', help='choose the denoised pre-trained model')
@@ -63,22 +62,30 @@ def main():
         in_channels=1
     elif opt.color_mode=='color':
         in_channels=3
+        
+    if opt.manipulation_mode=='SM':
+        mode_list=[0,1,2,3,4,5,6,7]
+    elif opt.manipulation_mode=='FM':
+        mode_list=[0,8,9,10,11,12]
+    elif opt.manipulation_mode=='Joint':
+        mode_list=[0,1,2,3,4,5,6,7,8,9,10,11,12]
+        
+    print("the denoise net is %s, "%str(opt.denoise_net),"the ensemble method is %s, "%str(opt.ensemble_method),"the manipulation mode is %s."%str(opt.manipulation_mode))
     print("Now,show the average PSNR of test datasets for different modes:")
     _,baseline_test_psnr,baseline_test_ssim=data_aug_denoise(test_img,opt.noise_std_values,[0],opt.denoise_net,opt.noise_mode)
-    test_data,test_psnr,test_ssim=data_aug_denoise(test_img,opt.noise_std_values,opt.mode_list,opt.denoise_net,opt.noise_mode)
+    test_data,test_psnr,test_ssim=data_aug_denoise(test_img,opt.noise_std_values,mode_list,opt.denoise_net,opt.noise_mode)
     print(np.mean(test_psnr,axis=0))
     
     print("the PSNR of simple ensemble method for test set:",simple_ensemble(test_data,test_img,opt.noise_std_values))
-    
     for i in range(len(opt.noise_std_values)):
         test_loader=prepare_dataloader(i,test_data,test_img,100,shuffle=False,patch_mode=False,win=50,stride=50)
         if opt.ensemble_method =='F':
-            model=Ensemble_fusion(len(opt.mode_list),in_channels).cuda()
+            model=Ensemble_fusion(len(mode_list),in_channels).cuda()
         elif opt.ensemble_method =='S':
-            model=Spatial_attention(len(opt.mode_list)).cuda()
+            model=Spatial_attention(len(mode_list)).cuda()
         elif opt.ensemble_method =='C':
-            model=Channel_attention(len(opt.mode_list)).cuda()
-        model.load_state_dict(torch.load(os.path.join("./saved_models",str(opt.denoise_net),'net_%s'%str(opt.ensemble_method),'net_%d.pth'%(opt.noise_std_values[i]))))
+            model=Channel_attention(len(mode_list)).cuda()
+        model.load_state_dict(torch.load(os.path.join("./saved_models",str(opt.denoise_net),str(opt.ensemble_method),str(opt.manipulation_mode),'net_%d.pth'%(opt.noise_std_values[i]))))
         model.eval()
         criterion=nn.MSELoss()
         criterion.cuda()

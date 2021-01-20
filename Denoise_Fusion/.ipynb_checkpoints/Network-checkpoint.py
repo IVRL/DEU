@@ -296,10 +296,10 @@ class Ensemble_fusion(nn.Module):
                                   
     def forward(self,x):
         
-        spatical_attention = x * F.softmax(self.resblocks(x), 1)
+        spatial_attention = x * F.softmax(self.resblocks(x), 1)
         
         channel_attention = self.seblock(x)
-        return self.fusion(torch.cat((spatical_attention, channel_attention), 1))
+        return self.fusion(torch.cat((spatial_attention, channel_attention), 1))
 
 
 class Spatial_attention(nn.Module):
@@ -308,8 +308,8 @@ class Spatial_attention(nn.Module):
         super(Spatial_attention,self).__init__()
         self.resblocks = ResBlock(layers_num=3, mode_num=mode_num,in_channels=1) 
     def forward(self,x):
-        spatical_attention = x * F.softmax(self.resblocks(x), 1)
-        return spatical_attention.sum(dim=1, keepdim=True)
+        spatial_attention = x * F.softmax(self.resblocks(x), 1)
+        return spatial_attention.sum(dim=1, keepdim=True)
 
 
 class Channel_attention(nn.Module):

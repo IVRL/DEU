@@ -391,7 +391,7 @@ def ensemble_evaluate(model,data_loader,criterion):
     return loss,psnr,ssim,output
 
 
-def train_ensemble(model_dir,noise_std,train_loader,test_loader,model,optimizer,criterion,ensemble_method,pbar=True, epochs=100,gamma=0.5):
+def train_ensemble(model_dir,noise_std,train_loader,test_loader,model,optimizer,criterion,pbar=True, epochs=100,gamma=0.5):
     ####### train the ensemble network
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=gamma)
     for epoch in range(epochs):
@@ -420,11 +420,7 @@ def train_ensemble(model_dir,noise_std,train_loader,test_loader,model,optimizer,
             if pbar:
                 pbar.set_postfix(**{'loss (batch)': loss.item()})
                 pbar.update(ensemble_target.shape[0])
-    
-    current_model_dir=os.path.join(model_dir, 'net_%s' % (ensemble_method))
-    if not os.path.exists(current_model_dir):
-        os.makedirs(current_model_dir)
-    torch.save(model.state_dict(), os.path.join(current_model_dir, 'net_%d.pth' % (noise_std)) )
+    torch.save(model.state_dict(), os.path.join(model_dir, 'net_%d.pth' % (noise_std)) )
 
     model.eval()
     with torch.no_grad():
