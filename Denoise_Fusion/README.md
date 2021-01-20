@@ -12,13 +12,13 @@
   * `RIDNet` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet/F/Joint): fusion models for gray images pre-denoised by RIDNet for all manipulation modes
   * `DnCNN_color` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color/F/Joint) : fusion models for color images pre-denoised by DnCNN_color for all manipulation modes
   
-  * except for the fusion models with joint manipulation modes, we also provide other saved models for channel attention module (C) and spatial attention module(S) with Spatial domain manipulation modes(SM）or frequency domain manipulation modes(FM),rather than Joint, which are shown on [DnCNN](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN),[MemNet](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet),[RIDNet](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet),[DnCNN_color](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color)
+  * except for the fusion models with joint manipulation modes, we also provide other saved models for channel attention module (C) and spatial attention module(S) with Spatial domain manipulation modes(SM）or frequency domain manipulation modes(FM),rather than Joint, which are shown on [DnCNN](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN), [MemNet](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet),     [RIDNet](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet), [DnCNN_color](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color)
 
 * `test.py`:test for the saved fusion models:  
 
 If you want to test the fusion model for DnCNN with joint manipulation modes
 
-```python test.py --manipulation_mode Joint --ensemble_method F --denoise_net DnCNN --color_mode gray; ```
+```python test.py --manipulation_mode Joint --ensemble_method F --denoise_net DnCNN --color_mode gray ```
 
 * `inference_calls`: commands to test all saved models
 
@@ -58,7 +58,7 @@ To reproduce the regular training of channel attention or spatial attention mode
 
 To reproduce the the regular training of fusion models with all manipulation modes(Joint) for pre_trained net DnCNN:
 
-```python train.py  --denoise_net DnCNN --ensemble_method F  --manipulation_mode Joint```
+```python train.py  --denoise_net DnCNN --ensemble_method F  --manipulation_mode Joint --color_mode gray```
 
 The spatial attention and channel attention are just fit for gray models until now.
 
