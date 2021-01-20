@@ -7,10 +7,10 @@
   * `DnCNN_color`:pre_trained denoised model for color images
   
 * `saved_models`:the saved models for each pre_trained denoisers
-  * `DnCNN` `F` `Joint` : fusion models for gray images pre-denoised by DnCNN  for all manipulation modes
-  * `MemNet` `F` `Joint`: fusion models for gray images pre-denoised by MemNet for all manipulation modes
-  * `RIDNet` `F` `Joint`: fusion models for gray images pre-denoised by RIDNet for all manipulation modes
-  * `DnCNN_color` `F` `Joint` : fusion models for color images pre-denoised by DnCNN_color for all manipulation modes
+  * `DnCNN` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN/F/Joint) : fusion models for gray images pre-denoised by DnCNN  for all manipulation modes
+  * `MemNet` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/MemNet/F/Joint): fusion models for gray images pre-denoised by MemNet for all manipulation modes
+  * `RIDNet` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/RIDNet/F/Joint): fusion models for gray images pre-denoised by RIDNet for all manipulation modes
+  * `DnCNN_color` `F` [Joint](https://github.com/IVRL/DEU/tree/main/Denoise_Fusion/saved_models/DnCNN_color/F/Joint) : fusion models for color images pre-denoised by DnCNN_color for all manipulation modes
   
   * except for the fusion models with joint manipulation modes, we also provide other saved models for channel attention module (C) and spatial attention module(S) with Spatial domain manipulation modes(SM）or frequency domain manipulation modes(FM),rather than Joint, which are shown on 
 
