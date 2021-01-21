@@ -12,7 +12,7 @@ python test.py --manipulation_mode FM --ensemble_method C --denoise_net DnCNN --
 python test.py --manipulation_mode Joint --ensemble_method F --denoise_net MemNet --color_mode gray;
 python test.py --manipulation_mode Joint --ensemble_method S --denoise_net MemNet --color_mode gray;
 python test.py --manipulation_mode Joint --ensemble_method C --denoise_net MemNet --color_mode gray;
-python test.py --manipulation_mode SM --ensemble_method F --denoise_net MemNet--color_mode gray;
+python test.py --manipulation_mode SM --ensemble_method F --denoise_net MemNet --color_mode gray;
 python test.py --manipulation_mode SM --ensemble_method S --denoise_net MemNet --color_mode gray;
 python test.py --manipulation_mode SM --ensemble_method C --denoise_net MemNet --color_mode gray;
 python test.py --manipulation_mode FM --ensemble_method F --denoise_net MemNet --color_mode gray;
@@ -24,9 +24,9 @@ python test.py --manipulation_mode Joint --ensemble_method S --denoise_net RIDNe
 python test.py --manipulation_mode Joint --ensemble_method C --denoise_net RIDNet --color_mode gray;
 python test.py --manipulation_mode SM --ensemble_method F --denoise_net RIDNet --color_mode gray;
 python test.py --manipulation_mode SM --ensemble_method S --denoise_net RIDNet --color_mode gray;
-python test.py --manipulation_mode SM --ensemble_method C --denoise_net RIDNet--color_mode gray;
+python test.py --manipulation_mode SM --ensemble_method C --denoise_net RIDNet --color_mode gray;
 python test.py --manipulation_mode FM --ensemble_method F --denoise_net RIDNet --color_mode gray;
-python test.py --manipulation_mode FM --ensemble_method S --denoise_net RIDNet--color_mode gray;
+python test.py --manipulation_mode FM --ensemble_method S --denoise_net RIDNet --color_mode gray;
 python test.py --manipulation_mode FM --ensemble_method C --denoise_net RIDNet --color_mode gray;
 #DnCNN for color models
 python test.py --manipulation_mode Joint --ensemble_method F --denoise_net DnCNN_color --color_mode color;
