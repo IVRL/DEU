@@ -20,10 +20,11 @@ All the models and instructions for testing with our pretrained networks, and fo
 
 ## Citation
 ```bibtex
-@article{ma2021deep,
+@inproceedings{ma2021deep,
     title   = {Deep {Gaussian} Denoiser Epistemic Uncertainty and Decoupled Dual-Attention Fusion},
     author  = {Ma, Xiaoqi and Lin, Xiaoyu and El Helou, Majed and S{\"u}sstrunk, Sabine},
-    journal = {arXiv preprint arXiv:2101.04631},
-    year    = {2021}
+    booktitle={International Conference on Image Processing (ICIP)},
+    year={2021},
+    organization={IEEE}
 }
 ```
