@@ -6,6 +6,8 @@
 ![pytorch 1.6.0](https://img.shields.io/badge/pytorch-1.6.0-green.svg?style=plastic)
 ![CUDA 10.1](https://camo.githubusercontent.com/5e1f2e59c9910aa4426791d95a714f1c90679f5a/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f637564612d31302e312d677265656e2e7376673f7374796c653d706c6173746963)
 
+#### -- Our frequency-domain experiments build on [SFM](https://github.com/majedelhelou/SFM) and the uncertainty-based attention is inspired by insights from [BUIFD](https://github.com/majedelhelou/BUIFD) and [BIGPrior](https://github.com/majedelhelou/BIGPrior) --
+
 #### [[Paper]](http://arxiv.org/abs/2101.04631) - [[Supp]](https://github.com/IVRL/DEU/blob/main/supplementary_material.pdf)
 
 > **Abstract:** *Following the performance breakthrough of denoising networks, improvements have come chiefly through novel architecture designs and increased depth. While novel denoising networks were designed for real images coming from different distributions, or for specific applications, comparatively small improvement was achieved on Gaussian denoising. The denoising solutions suffer from epistemic uncertainty that can limit further advancements. This uncertainty is traditionally mitigated through different ensemble approaches. However, such ensembles are prohibitively costly with deep networks, which are already large in size.*
